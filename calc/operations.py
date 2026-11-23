@@ -38,3 +38,4 @@ def test_calculator_wrapper():
     assert calc.sub.calculate(5, 2) == 3
     assert calc.mul.calculate(4, 3) == 12
     assert calc.div.calculate(8, 2) == 4
+    assert calc.div.calculate(8, 4) == 2
