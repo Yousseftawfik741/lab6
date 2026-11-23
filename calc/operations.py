@@ -1,41 +1,36 @@
-import pytest
-from calc.operations import Add, Sub, Mul, Div, Calculator
+class Add:
+    def calculate(self, a: float, b: float) -> float:
+        return a + b
 
 
-def test_add():
-    op = Add()
-    assert op.calculate(2, 3) == 5
-    assert op.calculate(-4, 6) == 2
+class Sub:
+    def calculate(self, a: float, b: float) -> float:
+        return a - b
 
 
-def test_sub():
-    op = Sub()
-    assert op.calculate(10, 4) == 6
-    assert op.calculate(3, 8) == -5
+class Mul:
+    def calculate(self, a: float, b: float) -> float:
+        return a * b
 
 
-def test_mul():
-    op = Mul()
-    assert op.calculate(3, 5) == 15
-    assert op.calculate(-2, 4) == -8
+class Div:
+    def calculate(self, a: float, b: float) -> float:
+        if b == 0:
+            raise ZeroDivisionError("Cannot divide by zero.")
+        return a / b
 
 
-def test_div():
-    op = Div()
-    assert op.calculate(10, 2) == 5
-    assert pytest.approx(op.calculate(7, 2)) == 3.5
+class Calculator:
+    def __init__(self) -> None:
+        self.add = Add()
+        self.sub = Sub()
+        self.mul = Mul()
+        self.div = Div()
 
 
-def test_div_by_zero():
-    op = Div()
-    with pytest.raises(ZeroDivisionError):
-        op.calculate(10, 0)
-
-
-def test_calculator_wrapper():
+if __name__ == "__main__":
     calc = Calculator()
-    assert calc.add.calculate(1, 2) == 3
-    assert calc.sub.calculate(5, 2) == 3
-    assert calc.mul.calculate(4, 3) == 12
-    assert calc.div.calculate(8, 2) == 4
-    assert calc.div.calculate(8, 4) == 2
+    print("10 + 5 =", calc.add.calculate(10, 5))
+    print("10 - 5 =", calc.sub.calculate(10, 5))
+    print("10 * 5 =", calc.mul.calculate(10, 5))
+    print("10 / 5 =", calc.div.calculate(10, 5))
